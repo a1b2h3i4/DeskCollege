@@ -1,0 +1,14 @@
+
+Creating Triggers:::
+
+create or replace TRIGGER "NBAPPDEV"."MARS_SM_APP_TEST_TRI" 
+   before insert on "NBAPPDEV"."MARS_SM_APP_TEST" 
+   for each row 
+begin  
+   if inserting then 
+      if :NEW."ID" is null then 
+         select MARS_SM_APP_TEST_SEQ.nextval into :NEW."ID" from dual; 
+      end if; 
+   end if; 
+end;
+
